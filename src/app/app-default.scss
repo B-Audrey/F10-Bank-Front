@@ -2,6 +2,8 @@
   --main-text-color: #2c3e50;
   --dark-color: #12002b;
   --light-color: #42b983;
+  --white-color: #fff;
+  --grey-color: #ccc;
 }
 
 html {
@@ -11,17 +13,30 @@ html {
   text-align: center;
   color: var(--main-text-color);
 }
-
 body {
+  margin: 0;
+}
+
+#root {
   margin: 0;
   display: flex;
   flex-direction: column;
   min-height: 100vh;
 }
+
 .main {
   flex: 1;
 }
 
 .bg-dark {
-  background-color: #12002b;
+  background-color: var(--dark-color);
+}
+
+.fa {
+  display: inline-block;
+  font: normal normal normal 14px / 1 FontAwesome;
+  font-size: inherit !important;
+  text-rendering: auto;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
