@@ -8,7 +8,16 @@ export default function Header() {
 
   const logOut = () => {
     store.dispatch({ type: 'LOGOUT' });
+    window.localStorage.removeItem('email');
+    window.localStorage.removeItem('token');
   };
+
+  useEffect(() => {
+    const mail = window.localStorage.getItem('email');
+    if (mail) {
+      setUserName(mail);
+    }
+  }, []);
 
   const store = useStore();
 
@@ -17,7 +26,7 @@ export default function Header() {
       return setUserName(store.getState()['email']);
     });
     console.log(userName);
-  }, [store, userName]);
+  }, [store]);
 
   return !userName ? (
     <nav className="main-nav">
