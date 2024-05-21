@@ -15,7 +15,7 @@ export default function Login() {
   const handleSubmit = (event: any) => {
     event.preventDefault();
     const userToLogin = { email: username, password } as User;
-    login(userToLogin).then(isLogged => {
+    login(userToLogin, rememberMe).then(isLogged => {
       if (isLogged) {
         navigate('/profile');
       } else {
