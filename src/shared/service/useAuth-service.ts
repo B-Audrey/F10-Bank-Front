@@ -7,9 +7,10 @@ export default function useAuthService() {
   const postLogIn = async (userToLogIn: User) => {
     try {
       const response = await axios.post(url, userToLogIn);
+      if (!response.data.body.token) return null;
       return response.data.body.token;
     } catch (error) {
-      return error
+      return console.error('Error:', error);
     }
   };
 

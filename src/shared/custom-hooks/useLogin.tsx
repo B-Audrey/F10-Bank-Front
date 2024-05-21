@@ -13,8 +13,9 @@ export default function useLogin() {
   const login = async (user: User) => {
     try {
       const tokenResponse = await postLogIn(user);
+      if (!tokenResponse) return false;
       setToken(tokenResponse);
-      store.dispatch({ type: 'LOGIN', payload: tokenResponse });
+      store.dispatch({ type: 'LOGIN', payload: { token: tokenResponse, email: user.email } });
       return true;
     } catch (error) {
       return false;
