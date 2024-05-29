@@ -2,33 +2,34 @@ import { NavLink } from 'react-router-dom';
 import './header.scss';
 import { useEffect, useState } from 'react';
 import { useStore } from 'react-redux';
+import useLogin from '../../custom-hooks/useLogin.tsx';
+import { UserModel } from '../../../app/store/user.model.ts';
 
 export default function Header() {
-  const [userName, setUserName] = useState('');
+  const [user, setUser] = useState({} as UserModel);
+  const [token, setToken] = useState<string | null>(window.localStorage.getItem('token') || null);
 
   const logOut = () => {
     store.dispatch({ type: 'LOGOUT' });
-    window.localStorage.removeItem('email');
-    window.localStorage.removeItem('token');
+    const items = ['email', 'token', 'firstName', 'lastName', 'id'];
+    items.forEach(item => {
+      window.localStorage.removeItem(item);
+    });
   };
 
-  useEffect(() => {
-    const mail = window.localStorage.getItem('email');
-    if (mail) {
-      setUserName(mail);
-    }
-  }, []);
+  const { getUser } = useLogin();
 
   const store = useStore();
 
   useEffect(() => {
-    store.subscribe(() => {
-      return setUserName(store.getState()['email']);
-    });
-    console.log(userName);
-  }, [store]);
+    store.subscribe(() => setToken(store.getState()['token']));
+    if (token) {
+      getUser(token, false);
+    }
+    store.subscribe(() => setUser(store.getState()));
+  }, [store, token]);
 
-  return !userName ? (
+  return !user.id ? (
     <nav className="main-nav">
       <NavLink className="main-nav-logo" to="/">
         <img className="main-nav-logo-image" src="/assets/img/argentBankLogo.png" alt="Argent Bank Logo" />
@@ -50,7 +51,7 @@ export default function Header() {
       <div>
         <NavLink className="main-nav-item" to="./profile">
           <i className="fa fa-user-circle"></i>
-          &nbsp;{userName.split('@')[0]}
+          &nbsp;{user.firstName}&nbsp;
         </NavLink>
         <NavLink onClick={logOut} className="main-nav-item" to="/">
           <i className="fa fa-sign-out"></i>

@@ -1,25 +1,50 @@
 import { configureStore } from '@reduxjs/toolkit';
+import { UserModel } from './user.model.ts';
 
 
-const userState: {email?:string, token?:string} = {
-  email: undefined,
-  token: undefined
-}
+const userState: UserModel = {
+  token: '',
+  email: '',
+  firstName: '',
+  lastName: '',
+  id: '',
+};
 
-const reducer = (currentState, action: {type:string, payload:any} ) => {
+const reducer = (currentState, action: { type: string, payload: any }) => {
   switch (action.type) {
     case 'LOGIN':
-      return { ...currentState, token: action.payload.token, email: action.payload.email}
+      return { ...currentState, token: action.payload.token, email: action.payload.email };
+    case 'ME':
+      return {
+        ...currentState,
+        firstName: action.payload.firstName,
+        lastName: action.payload.lastName,
+        id: action.payload.id,
+        email: action.payload.email,
+        token: action.payload.token,
+      };
+    case 'UPDATE':
+      return {
+        ...currentState,
+        firstName: action.payload.firstName,
+        lastName: action.payload.lastName,
+      };
     case 'LOGOUT':
-      return { ...currentState, token: undefined, email: undefined}
+      return {
+        token: undefined,
+        email: undefined,
+        firstName: undefined,
+        lastName: undefined,
+        id: undefined,
+      };
     default:
-      return currentState
+      return currentState;
   }
-}
+};
 
 export const userStore = configureStore(
   {
     preloadedState: userState,
-    reducer
-  }
-)
+    reducer,
+  },
+);
