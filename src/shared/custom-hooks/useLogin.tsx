@@ -10,12 +10,10 @@ export default function useLogin() {
   const login = async (user: User, rememberMe: boolean) => {
     try {
       const tokenResponse = await postLogIn(user);
-      console.log('token : ', tokenResponse);
       if (!tokenResponse) return false;
       store.dispatch({ type: 'LOGIN', payload: { token: tokenResponse, email: user.email } });
       if (rememberMe) {
         window.localStorage.setItem('token', tokenResponse);
-        window.localStorage.setItem('email', user.email);
       }
       return tokenResponse;
     } catch (error) {

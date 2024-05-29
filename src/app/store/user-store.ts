@@ -13,8 +13,6 @@ const userState: UserModel = {
 const reducer = (currentState, action: { type: string, payload: any }) => {
   switch (action.type) {
     case 'LOGIN':
-      console.log('je suis dans l action login');
-      console.log('action.payload', action.payload);
       return { ...currentState, token: action.payload.token, email: action.payload.email };
     case 'ME':
       return {
@@ -26,12 +24,6 @@ const reducer = (currentState, action: { type: string, payload: any }) => {
         token: action.payload.token,
       };
     case 'UPDATE':
-      try {
-        const userParams = { firstName: action.payload.firstName, lastName: action.payload.lastName };
-        console.log('user in store', userParams);
-      } catch (error) {
-        console.error('error', error);
-      }
       return {
         ...currentState,
         firstName: action.payload.firstName,
