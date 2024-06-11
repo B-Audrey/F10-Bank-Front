@@ -1,13 +1,16 @@
 import useUserService from '../service/useUser-service.ts';
 import { User } from '../interfaces/user.ts';
 import { useStore } from 'react-redux';
+import { useState } from 'react';
 
 export default function useLogin() {
   const store = useStore();
+  const [isLoading, setIsLoading] = useState(false);
 
   const { postLogIn, getMe } = useUserService();
 
   const login = async (user: User, rememberMe: boolean) => {
+    setIsLoading(true);
     try {
       const tokenResponse = await postLogIn(user);
       if (!tokenResponse) return false;
@@ -15,6 +18,7 @@ export default function useLogin() {
       if (rememberMe) {
         window.localStorage.setItem('token', tokenResponse);
       }
+      setIsLoading(false);
       return tokenResponse;
     } catch (error) {
       return false;
@@ -22,6 +26,7 @@ export default function useLogin() {
   };
 
   const getUser = async (token: string, rememberMe: boolean) => {
+    setIsLoading(true);
     try {
       const userResponse = await getMe(token);
       if (!userResponse) return false;
@@ -41,11 +46,12 @@ export default function useLogin() {
         window.localStorage.setItem('id', userResponse.id);
         window.localStorage.setItem('email', userResponse.email);
       }
+      setIsLoading(false);
       return true;
     } catch (error) {
       return false;
     }
   };
 
-  return { login, getUser };
+  return { login, getUser, isLoading };
 }

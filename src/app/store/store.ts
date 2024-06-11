@@ -2,13 +2,7 @@ import { configureStore } from '@reduxjs/toolkit';
 import { UserModel } from './user.model.ts';
 
 
-const userState: UserModel = {
-  token: '',
-  email: '',
-  firstName: '',
-  lastName: '',
-  id: '',
-};
+const userState: UserModel = {};
 
 const reducer = (currentState, action: { type: string, payload: any }) => {
   switch (action.type) {
@@ -42,7 +36,7 @@ const reducer = (currentState, action: { type: string, payload: any }) => {
   }
 };
 
-export const userStore = configureStore(
+export const store = configureStore(
   {
     preloadedState: userState,
     reducer,

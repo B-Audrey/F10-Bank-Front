@@ -24,9 +24,12 @@ export default function Header() {
   useEffect(() => {
     store.subscribe(() => setToken(store.getState()['token']));
     if (token) {
-      getUser(token, false);
+      getUser(token, false).then(isUserConnected => {
+        if (isUserConnected) setUser(store.getState());
+      });
+    } else {
+      store.subscribe(() => setUser(store.getState()));
     }
-    store.subscribe(() => setUser(store.getState()));
   }, [store, token]);
 
   return !user.id ? (

@@ -28,7 +28,6 @@ export default function useUserService() {
   }
 
   const putUser = async (token:string, user: Partial<User>) => {
-    console.log('je rentre dans le user service');
     try {
       const response = await axios.put(`${url}/profile`, user, {
         headers: {
