@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import TransactionBalance from '../../../shared/components/transaction-balance/transaction-balance.tsx';
 import { getToken, getFirstName, getLastName } from '../../store/user-selectors.ts';
-import { useUpdate } from '../../../shared/custom-hooks/useUpdate.tsx';
+import { useUpdateUser } from '../../../shared/custom-hooks/useUpdateUser.tsx';
 import Loader from '../../../shared/components/loader/loader.tsx';
 import Login from '../login/login.tsx';
 
@@ -18,13 +18,14 @@ export default function Profile() {
   const lastName = useSelector(getLastName);
 
   const [isEditing, setIsEditing] = useState(false);
-  const [userState, setUserState] = useState({ firstName, lastName });
+  const [userUpdateInfosState, setUserUpdateInfosState] = useState({ firstName, lastName });
 
-  const { updateUser, isLoading } = useUpdate();
+  const { updateUser, isLoading } = useUpdateUser();
 
+  // always update the userUpdateInfosState when the firstName or lastName from state changes : SSoT.
   useEffect(() => {
     if (firstName && lastName) {
-      setUserState({ firstName, lastName });
+      setUserUpdateInfosState({ firstName, lastName });
     }
   }, [firstName, lastName]);
 
@@ -32,12 +33,13 @@ export default function Profile() {
     setIsEditing(!isEditing);
   };
 
+  // on submit, if the user has empty value we use store values before sending update.
   const handleSubmit = (event: any) => {
     event.preventDefault();
-    if (!userState.firstName || !userState.lastName) {
-      setUserState({ firstName, lastName });
+    if (!userUpdateInfosState.firstName || !userUpdateInfosState.lastName) {
+      setUserUpdateInfosState({ firstName, lastName });
     }
-    const userParams = { firstName: userState.firstName, lastName: userState.lastName };
+    const userParams = { firstName: userUpdateInfosState.firstName, lastName: userUpdateInfosState.lastName };
     updateUser(token, userParams).then(() => setIsEditing(false));
   };
 
@@ -51,15 +53,15 @@ export default function Profile() {
             <div>
               <h1>Welcome back</h1>
               <form>
-                <input name={'firstName'} className={'edit-input'} value={userState.firstName} onChange={e => setUserState(prev => ({ ...prev, firstName: e.target.value }))} />
-                <input name={'lastName'} className={'edit-input'} value={userState.lastName} onChange={e => setUserState(prev => ({ ...prev, lastName: e.target.value }))} />
+                <input name={'firstName'} className={'edit-input'} value={userUpdateInfosState.firstName} onChange={e => setUserUpdateInfosState(prev => ({ ...prev, firstName: e.target.value }))} />
+                <input name={'lastName'} className={'edit-input'} value={userUpdateInfosState.lastName} onChange={e => setUserUpdateInfosState(prev => ({ ...prev, lastName: e.target.value }))} />
               </form>
               <div>
                 <button
                   onClick={handleSubmit}
                   className="edit-button save"
                   type={'submit'}
-                  disabled={userState.firstName === firstName && userState.lastName === lastName}>
+                  disabled={userUpdateInfosState.firstName === firstName && userUpdateInfosState.lastName === lastName}>
                   Save
                 </button>
                 <button onClick={handleClick} className="edit-button" type={'button'}>

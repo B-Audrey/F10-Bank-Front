@@ -7,12 +7,12 @@ export default function useLogin() {
   const store = useStore();
   const [isLoading, setIsLoading] = useState(false);
 
-  const { postLogIn, getMe } = useUserService();
+  const { postLogInService, getMeService } = useUserService();
 
   const login = async (user: User, rememberMe: boolean) => {
     setIsLoading(true);
     try {
-      const tokenResponse = await postLogIn(user);
+      const tokenResponse = await postLogInService(user);
       if (!tokenResponse) return false;
       store.dispatch({ type: 'LOGIN', payload: { token: tokenResponse, email: user.email } });
       if (rememberMe) {
@@ -28,7 +28,7 @@ export default function useLogin() {
   const getUser = async (token: string, rememberMe: boolean) => {
     setIsLoading(true);
     try {
-      const userResponse = await getMe(token);
+      const userResponse = await getMeService(token);
       if (!userResponse) return false;
       store.dispatch({
         type: 'ME',

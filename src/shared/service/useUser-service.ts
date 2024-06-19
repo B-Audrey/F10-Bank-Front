@@ -4,7 +4,7 @@ import axios from 'axios';
 export default function useUserService() {
   const url = 'http://localhost:3001/api/v1/user';
 
-  const postLogIn = async (userToLogIn: User) => {
+  const postLogInService = async (userToLogIn: User) => {
     try {
       const response = await axios.post(`${url}/login`, userToLogIn);
       if (!response.data.body.token) return null;
@@ -14,7 +14,7 @@ export default function useUserService() {
     }
   };
 
-  const getMe = async (token: string) => {
+  const getMeService = async (token: string) => {
     try {
       const response = await axios.post(`${url}/profile`, {}, {
         headers: {
@@ -27,7 +27,7 @@ export default function useUserService() {
     }
   }
 
-  const putUser = async (token:string, user: Partial<User>) => {
+  const putUserService = async (token:string, user: Partial<User>) => {
     try {
       const response = await axios.put(`${url}/profile`, user, {
         headers: {
@@ -42,5 +42,5 @@ export default function useUserService() {
   };
 
 
-  return { postLogIn, getMe, putUser };
+  return { postLogInService, getMeService, putUserService };
 }

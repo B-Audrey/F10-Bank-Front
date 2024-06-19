@@ -3,15 +3,15 @@ import { User } from '../interfaces/user.ts';
 import useUserService from '../service/useUser-service.ts';
 import { useState } from 'react';
 
-export function useUpdate() {
+export function useUpdateUser() {
   const store = useStore();
-  const { putUser } = useUserService();
+  const { putUserService } = useUserService();
   const [isLoading, setIsLoading] = useState(false);
 
   const updateUser = async (token: string, user: Partial<User>) => {
     setIsLoading(true);
     try {
-      const updatedUserResponse = await putUser(token, user);
+      const updatedUserResponse = await putUserService(token, user);
       store.dispatch({
         type: 'UPDATE',
         payload: { firstName: updatedUserResponse.firstName, lastName: updatedUserResponse.lastName },

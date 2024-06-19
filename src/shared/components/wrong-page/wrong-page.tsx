@@ -5,10 +5,10 @@ export default function WrongPage() {
   return (
     <>
       <div className="wrong-page">
-        <h1>404 Not Found</h1>
+        <h1>Erreur</h1>
         <p>
           {' '}
-          La page demandée n'existe pas, <NavLink to="/">retournez à la page d'accueil</NavLink>
+          La page demandée n'est pas disponible, <NavLink to="/">retournez à la page d'accueil</NavLink>
         </p>
       </div>
     </>
