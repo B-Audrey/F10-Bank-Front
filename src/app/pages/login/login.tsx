@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import Loader from '../../../shared/components/loader/loader.tsx';
 
 export default function Login() {
+
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [rememberMe, setRememberMe] = useState(false);
@@ -13,6 +14,9 @@ export default function Login() {
   const { login, isLoading } = useLogin();
   const navigate = useNavigate();
 
+  // on submit, get the user and password and send it to the login function.
+  // if the login is successful, navigate to the profile page.
+  // else, alert the user that the connection is impossible.
   const handleSubmit = (event: any) => {
     event.preventDefault();
     const userToLogin = { email: username, password } as User;
@@ -21,11 +25,14 @@ export default function Login() {
         if (isLogged) {
           navigate('/profile');
         } else {
-          alert('connection impossible');
+          navigate('');
+          console.log('Connection impossible');
+          alert('Connection impossible');
         }
       });
   };
 
+  console.log('isLoading', isLoading);
 
   if (isLoading) return <Loader />;
 
