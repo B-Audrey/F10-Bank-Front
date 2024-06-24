@@ -13,7 +13,6 @@ export default function useLogin() {
     setIsLoading(true);
     try {
       const tokenResponse = await postLogInService(user);
-      console.log(tokenResponse);
       if (!tokenResponse) return false;
       store.dispatch({ type: 'LOGIN', payload: { token: tokenResponse, email: user.email } });
       if (rememberMe) {
@@ -22,7 +21,6 @@ export default function useLogin() {
       setIsLoading(false);
       return tokenResponse;
     } catch (error) {
-      console.log('je tombe dans le catch du hook userLogin');
       setIsLoading(false)
       return false;
     }

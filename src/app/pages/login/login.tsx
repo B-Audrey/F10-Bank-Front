@@ -26,13 +26,10 @@ export default function Login() {
           navigate('/profile');
         } else {
           navigate('');
-          console.log('Connection impossible');
           alert('Connection impossible');
         }
       });
   };
-
-  console.log('isLoading', isLoading);
 
   if (isLoading) return <Loader />;
 
