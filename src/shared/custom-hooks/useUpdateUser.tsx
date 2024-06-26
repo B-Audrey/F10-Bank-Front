@@ -8,6 +8,7 @@ export function useUpdateUser() {
   const { putUserService } = useUserService();
   const [isLoading, setIsLoading] = useState(false);
 
+  // updates the user by using the store with the request response.
   const updateUser = async (token: string, user: Partial<User>) => {
     setIsLoading(true);
     try {

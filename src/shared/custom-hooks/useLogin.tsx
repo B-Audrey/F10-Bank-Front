@@ -9,6 +9,11 @@ export default function useLogin() {
 
   const { postLogInService, getMeService } = useUserService();
 
+  // login function, takes a user and a boolean to know if we must keep token in local storage
+  // post token to auth the user
+  // if we get token in response, dispatch login action and keep token in the store
+  // if remember me is true, store the token in the local storage
+  // else, we return false to the component
   const login = async (user: User, rememberMe: boolean) => {
     setIsLoading(true);
     try {
@@ -26,6 +31,7 @@ export default function useLogin() {
     }
   };
 
+  // get user function, to dispatch the user in the store
   const getUser = async (token: string, rememberMe: boolean) => {
     setIsLoading(true);
     try {

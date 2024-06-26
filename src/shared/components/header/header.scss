@@ -46,6 +46,24 @@ nav a {
   max-width: 100%;
   width: 200px;
 }
+
 .sign-in-icon {
   font-size: 5rem;
+}
+
+.header-text {
+  display: none;
+  @media (min-width: 426px) {
+    display: inline;
+  }
+}
+
+.main-nav .fa-user-circle, .main-nav .fa-sign-out {
+  padding: 0.4em;
+  border: 1px solid var(--light-color);
+  border-radius: 100%;
+  @media (min-width: 426px) {
+    padding: unset;
+    border: none;
+  }
 }
