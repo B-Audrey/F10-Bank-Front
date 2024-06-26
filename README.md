@@ -1,6 +1,6 @@
-# React + TypeScript + Vite
+# Bank API project
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This project is about authentification for users. Users, can log in and update their first name, last name.
 
 ## Backend
 This front end goes with F-10-Bank- for backend

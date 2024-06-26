@@ -58,7 +58,7 @@ export default function Login() {
 
 
   return (
-    <main className="main bg-dark login">
+    <main className="main bg-light login">
       {isLoading ? <Loader /> : null}
       {isError ? <Toast message={'Connection impossible'} color={'rgba(186, 44, 27, 0.9)'} /> : null}
       <section className="sign-in-content">

@@ -2,8 +2,11 @@
   --main-text-color: #2c3e50;
   --dark-color: #12002b;
   --light-color: #42b983;
+  --secondary-color: #5a56c8;
   --white-color: #fff;
-  --grey-color: #ccc;
+  --black-color: #000;
+  --grey-color: #b9bcc8;
+  --dark-grey-color: #8c8c8c;
 }
 
 html {
@@ -30,6 +33,10 @@ body {
 
 .bg-dark {
   background-color: var(--dark-color);
+}
+
+.bg-light {
+  background-color: var(--grey-color);
 }
 
 .fa {

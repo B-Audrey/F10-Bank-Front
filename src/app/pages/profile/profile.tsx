@@ -62,7 +62,7 @@ export default function Profile() {
   };
 
   return token ? (
-    <main className="main bg-dark">
+    <main className="main bg-light">
       {isLoading ? <Loader /> : null}
       <div className="header">
         {isEditing ? (

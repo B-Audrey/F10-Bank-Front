@@ -16,10 +16,8 @@
   margin-top: 1em;
   padding : 10px;
   display: flex;
-  gap: 15px;
-  animation: fadeInOut 5s forwards;
+  animation: fadeInOut 4s;
   border-radius: 4px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 
@@ -32,7 +30,7 @@
     opacity: 1;
     transform: translateY(0);
   }
-  90% {
+  80% {
     opacity: 1;
     transform: translateY(0);
   }

@@ -2,7 +2,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border: 1px solid black;
+  border: 2px solid var(--dark-grey-color);
   background-color: #fff;
   width: 80%;
   margin: 0 auto;
@@ -42,9 +42,10 @@
   font-size: 1.1rem;
   font-weight: bold;
   margin-top: 1rem;
-  border-color: #00bc77;
-  background-color: #00bc77;
-  color: #fff;
+  border-color: var(--secondary-color);
+  background-color: var(--secondary-color);
+  color: var(--white-color);
+  border-radius: 3px;
 }
 
 @media (min-width: 720px) {

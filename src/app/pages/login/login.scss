@@ -5,13 +5,14 @@
   font-size: 1.1rem;
   font-weight: bold;
   margin-top: 1rem;
-  border-color: var(--light-color);
-  background-color: var(--light-color);
+  border-color: var(--secondary-color);
+  background-color: var(--secondary-color);
+  border-radius: 3px;
   color: var(--white-color);
   &:disabled {
     background-color: var(--grey-color);
     border-color: var(--grey-color);
-    color: var(--main-text-color);
+    color: var(--dark-grey-color);
   }
 }
 
@@ -46,4 +47,5 @@
 .input-wrapper input {
   padding: 5px;
   font-size: 1.2rem;
+  border: 2px solid var(--dark-grey-color);
 }
